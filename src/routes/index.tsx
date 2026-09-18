@@ -1,24 +1,20 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { PerformanceTab } from "@/components/efb/PerformanceTab";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: "이착륙 성능 계산기 — EFB" },
+      {
+        name: "description",
+        content: "기압고도·밀도고도·바람 성분과 이착륙 필요거리를 계산하는 파일럿용 EFB. 시뮬레이터·학습용.",
+      },
+      { property: "og:title", content: "이착륙 성능 계산기 — EFB" },
+      {
+        property: "og:description",
+        content: "기압고도·밀도고도·바람 성분과 이착륙 필요거리를 계산하는 파일럿용 EFB. 시뮬레이터·학습용.",
+      },
+    ],
+  }),
+  component: PerformanceTab,
 });
-
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
-}
