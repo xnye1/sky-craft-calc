@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as E6bRouteImport } from './routes/e6b'
+import { Route as PlanningRouteImport } from './routes/planning'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +23,40 @@ const E6bRoute = E6bRouteImport.update({
   path: '/e6b',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PlanningRoute = PlanningRouteImport.update({
+  id: '/planning',
+  path: '/planning',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/e6b': typeof E6bRoute
+  '/planning': typeof PlanningRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/e6b': typeof E6bRoute
+  '/planning': typeof PlanningRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/e6b': typeof E6bRoute
+  '/planning': typeof PlanningRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/e6b'
+  fullPaths: '/' | '/e6b' | '/planning'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/e6b'
-  id: '__root__' | '/' | '/e6b'
+  to: '/' | '/e6b' | '/planning'
+  id: '__root__' | '/' | '/e6b' | '/planning'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   E6bRoute: typeof E6bRoute
+  PlanningRoute: typeof PlanningRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +75,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof E6bRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/planning': {
+      id: '/planning'
+      path: '/planning'
+      fullPath: '/planning'
+      preLoaderRoute: typeof PlanningRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   E6bRoute: E6bRoute,
+  PlanningRoute: PlanningRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
