@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as E6bRouteImport } from './routes/e6b'
+import { Route as PhysicsRouteImport } from './routes/physics'
 import { Route as PlanningRouteImport } from './routes/planning'
 
 const IndexRoute = IndexRouteImport.update({
@@ -23,6 +24,11 @@ const E6bRoute = E6bRouteImport.update({
   path: '/e6b',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PhysicsRoute = PhysicsRouteImport.update({
+  id: '/physics',
+  path: '/physics',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PlanningRoute = PlanningRouteImport.update({
   id: '/planning',
   path: '/planning',
@@ -32,30 +38,34 @@ const PlanningRoute = PlanningRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/e6b': typeof E6bRoute
+  '/physics': typeof PhysicsRoute
   '/planning': typeof PlanningRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/e6b': typeof E6bRoute
+  '/physics': typeof PhysicsRoute
   '/planning': typeof PlanningRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/e6b': typeof E6bRoute
+  '/physics': typeof PhysicsRoute
   '/planning': typeof PlanningRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/e6b' | '/planning'
+  fullPaths: '/' | '/e6b' | '/physics' | '/planning'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/e6b' | '/planning'
-  id: '__root__' | '/' | '/e6b' | '/planning'
+  to: '/' | '/e6b' | '/physics' | '/planning'
+  id: '__root__' | '/' | '/e6b' | '/physics' | '/planning'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   E6bRoute: typeof E6bRoute
+  PhysicsRoute: typeof PhysicsRoute
   PlanningRoute: typeof PlanningRoute
 }
 
@@ -75,6 +85,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof E6bRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/physics': {
+      id: '/physics'
+      path: '/physics'
+      fullPath: '/physics'
+      preLoaderRoute: typeof PhysicsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/planning': {
       id: '/planning'
       path: '/planning'
@@ -88,6 +105,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   E6bRoute: E6bRoute,
+  PhysicsRoute: PhysicsRoute,
   PlanningRoute: PlanningRoute,
 }
 export const routeTree = rootRouteImport
