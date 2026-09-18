@@ -1,0 +1,14 @@
+[
+  {
+    "id": "c172s",
+    "name": "Cessna 172S",
+    "refWeightLb": 2550,
+    "takeoffGroundRollFt": 960,
+    "takeoff50ftFt": 1630,
+    "landingGroundRollFt": 575,
+    "landing50ftFt": 1335,
+    "takeoffSpeedKt": 55,
+    "approximate": true,
+    "note": "POH 대조 필요한 근사값 (해수면·ISA·2550lb 기준)"
+  }
+]
