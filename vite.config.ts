@@ -11,5 +11,7 @@ export default defineConfig({
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
     server: { entry: "server" },
+    // 모든 탭을 정적 HTML로 미리 렌더링 → dist/client 폴더만 nginx로 서빙하면 됨 (백엔드 불필요)
+    prerender: { enabled: true, crawlLinks: true },
   },
 });
